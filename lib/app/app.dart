@@ -9,6 +9,9 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        useMaterial3: true,
+      ),
       title: 'My Apps',
       routerConfig: router,
     );

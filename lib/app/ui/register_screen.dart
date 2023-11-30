@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login_otp/app/ui/register_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
-class LoginScreen extends ConsumerWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends ConsumerWidget {
+  const RegisterScreen({super.key});
 
-  static String routeName = 'login-screen';
+  static String routeName = 'register-screen';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     Size size = MediaQuery.sizeOf(context);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text("Login"),
+        title: const Text("Register"),
         actions: const [],
       ),
       body: Padding(
@@ -26,6 +25,11 @@ class LoginScreen extends ConsumerWidget {
             ),
             // Email field
             const TextField(
+              keyboardType: TextInputType.text,
+              decoration: InputDecoration(labelText: "Username"),
+            ),
+            // Email field
+            const TextField(
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(labelText: "Email"),
             ),
@@ -35,30 +39,21 @@ class LoginScreen extends ConsumerWidget {
               obscureText: true,
               decoration: InputDecoration(labelText: "Password"),
             ),
+            const TextField(
+              obscureText: true,
+              decoration: InputDecoration(labelText: "Confirm Password"),
+            ),
             const SizedBox(height: 20),
             // Login button
             SizedBox(
               width: size.width,
               child: ElevatedButton(
                 onPressed: () {},
-                child: const Text("Login"),
+                child: const Text("Register"),
               ),
             ),
             const Expanded(child: SizedBox(height: 20)),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text("Don't have account? "),
-                InkWell(
-                  onTap: () => context.pushNamed(RegisterScreen.routeName),
-                  child: const Text(
-                    "Register Here.",
-                    style: TextStyle(color: Colors.purple),
-                  ),
-                ),
-              ],
-            ),
+
             // Register button
           ],
         ),

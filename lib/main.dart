@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login_otp/app/app.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
   runApp(
-    const MyApp(),
+    const ProviderScope(child: MyApp()),
   );
 }
