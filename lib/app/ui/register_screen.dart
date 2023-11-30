@@ -53,8 +53,6 @@ class RegisterScreen extends ConsumerWidget {
               ),
             ),
             const Expanded(child: SizedBox(height: 20)),
-
-            // Register button
           ],
         ),
       ),
