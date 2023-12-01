@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_login_otp/app/data/db_helper.dart';
 import 'package:flutter_login_otp/app/ui/otp_screen.dart';
 import 'package:flutter_login_otp/app/ui/register_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+
+import '../models/user_model.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -15,13 +18,21 @@ class LoginScreen extends ConsumerStatefulWidget {
 class _LoginScreenState extends ConsumerState<LoginScreen> {
   bool isEmailValid = true;
   final loginFormKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  final DatabaseHelper _dbHelper = DatabaseHelper();
+  final TextEditingController _emailController = TextEditingController(text: 'sifatih@gmail.com');
+  final TextEditingController _passwordController = TextEditingController(text: 'Fatih123!');
+
+  @override
+  void initState() {
+    _dbHelper.database();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text("Login"),
         actions: const [],
@@ -58,17 +69,22 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (loginFormKey.currentState!.validate()) {
-                      debugPrint('login berhasil');
-                      context.pushNamed(OTPScreen.routeName);
+                      // debugPrint('login berhasil');
+                      getLogin(
+                        _emailController.text,
+                        _passwordController.text,
+                      ).then((value) {
+                        if (value != null) {
+                          context.goNamed(OTPScreen.routeName, extra: value);
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Email or password is incorrect'),
+                            ),
+                          );
+                        }
+                      });
                     }
-
-                    // if (emailError == null && passwordError == null) {
-                    //   // Both email and password are valid, perform login logic here
-                    //   print("Login button pressed");
-                    // } else {
-                    //   // Show error messages for invalid input
-                    //   print("Invalid input. Email: $emailError, Password: $passwordError");
-                    // }
                   },
                   child: const Text("Login"),
                 ),
@@ -114,5 +130,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   String? _validateEmail(String? value) {
     isEmailValid = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$').hasMatch(value ?? '');
     return isEmailValid ? null : 'Enter a valid email address';
+  }
+
+  // get login
+  Future<UserModel?> getLogin(String email, String password) async {
+    var res = await _dbHelper.getLogin(email, password);
+    return res;
   }
 }
