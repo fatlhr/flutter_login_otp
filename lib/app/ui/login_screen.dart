@@ -7,6 +7,10 @@ import 'package:go_router/go_router.dart';
 
 import '../models/user_model.dart';
 
+final _showPasswordProvider = StateProvider<bool>((ref) {
+  return true;
+});
+
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
   static String routeName = 'login-screen';
@@ -19,8 +23,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   bool isEmailValid = true;
   final loginFormKey = GlobalKey<FormState>();
   final DatabaseHelper _dbHelper = DatabaseHelper();
-  final TextEditingController _emailController = TextEditingController(text: 'sifatih@gmail.com');
-  final TextEditingController _passwordController = TextEditingController(text: 'Fatih123!');
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   void initState() {
@@ -57,10 +61,22 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               const SizedBox(height: 12),
               // Password field
               TextFormField(
-                obscureText: true,
+                obscureText: ref.watch(_showPasswordProvider),
+                enableSuggestions: false,
+                autocorrect: false,
                 controller: _passwordController,
                 validator: _validatePassword,
-                decoration: const InputDecoration(labelText: "Password"),
+                decoration: InputDecoration(
+                  labelText: "Password",
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      ref.watch(_showPasswordProvider) ? Icons.visibility : Icons.visibility_off,
+                    ),
+                    onPressed: () {
+                      ref.read(_showPasswordProvider.notifier).state = !ref.watch(_showPasswordProvider);
+                    },
+                  ),
+                ),
               ),
               const SizedBox(height: 20),
               // Login button
