@@ -16,8 +16,8 @@ A simple mobile app for user authentication and OTP validation.
 
 ## Screenshots
 
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
+| Login Screen | OTP Screen | Home Screen|
+| ------------- |:-------------:| -----|
 |![Login Screen](https://i.postimg.cc/MHh21rKn/Screenshot-2023-12-02-at-07-09-35.png)|![OTP](https://i.postimg.cc/FRV7W3JF/Screenshot-2023-12-02-at-07-03-50.png)|![Home](https://i.postimg.cc/d16VmFzL/Screenshot-2023-12-02-at-07-05-40.png)|
 
 ## Source
