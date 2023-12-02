@@ -1,16 +1,24 @@
-# flutter_login_otp
 
-A new Flutter project.
+# Flutter Login OTP
 
-## Getting Started
+A simple mobile app for user authentication and OTP validation.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Tech Stack
+- **Database** : SqfLite (SQL Local Database)
+- **State Management** : Riverpod
+- **Router** : Go Router
+- **Session** : Shared Preferences (to save user login)
+
+
+
+## Screenshots
+
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+|![Login Screen](https://i.postimg.cc/MHh21rKn/Screenshot-2023-12-02-at-07-09-35.png)|![OTP](https://i.postimg.cc/FRV7W3JF/Screenshot-2023-12-02-at-07-03-50.png)|![Home](https://i.postimg.cc/d16VmFzL/Screenshot-2023-12-02-at-07-05-40.png)|
+
+## Source
+[Stealth Startup Skill Test - Mobile Engineer](https://docs.google.com/document/d/1wnHeTJ7MR95TTDqpO--DRSzNlcqQmbTxUagpzsOWuQo/edit#heading=h.7i6zcpjzkl0o).
